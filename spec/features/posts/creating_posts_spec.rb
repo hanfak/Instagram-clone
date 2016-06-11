@@ -8,6 +8,15 @@ require 'rails_helper.rb'
 
 
 feature 'Creating posts' do
+  background do
+    user = create(:user)
+    visit '/'
+    click_link 'Login'
+    fill_in 'Email', with: 'fancyfrank@gmail.com'
+    fill_in 'Password', with: 'illbeback'
+    click_button 'Log in'
+  end
+
   scenario 'can create a job' do
     visit '/'
     click_link 'New Post'
@@ -16,18 +25,14 @@ feature 'Creating posts' do
     click_button 'Create Post'
     expect(page).to have_content('#lionking')
     expect(page).to have_css("img[src*='mufasa.jpg']")
+    # expect(page).to have_content('Arnie')
   end
 
   it 'needs an image to create a post' do
-  # visit root route
-  # click the 'New Post' link
-  visit '/'
-  click_link 'New Post'
-  # fill in the caption field (without touching the image field)
-  fill_in 'Caption', with: 'nom nom nom #lionking'
-  # click the 'Create Post' button
-  click_button 'Create Post'
-  # expect the page to say, "Halt, you fiend! You need an image to post here!"
-  expect(page).to have_content "Halt, you fiend! You need an image to post here!"
-end
+    visit '/'
+    click_link 'New Post'
+    fill_in 'Caption', with: 'nom nom nom #lionking'
+    click_button 'Create Post'
+    expect(page).to have_content "Halt, you fiend! You need an image to post here!"
+  end
 end
