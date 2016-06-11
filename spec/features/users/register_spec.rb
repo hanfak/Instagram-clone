@@ -46,4 +46,6 @@ feature 'Creating a new user' do
     expect(page).to have_content('maximum is 16 characters')
     expect(page).to_not have_content('Welcome! You have signed up successfully.')
   end
+
+
 end
