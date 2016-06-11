@@ -15,6 +15,7 @@ gem 'devise'
 gem 'haml'
 gem 'simple_form'
 gem 'paperclip', '~> 4.2'
+gem "factory_girl_rails", "~> 4.0"  
 group :test do
   gem 'rspec-rails'
   gem 'capybara'
