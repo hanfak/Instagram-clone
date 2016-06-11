@@ -20,12 +20,27 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = find_post
+  end
+
+  def edit
+    @post = find_post
+  end
+
+  def update
+    @post = find_post
+    @post.update(post_params)
+    flash[:success] = "Post updated hombre"
+    redirect_to(post_path(@post))
   end
 
   private
 
   def post_params
     params.require(:post).permit(:caption, :image)
+  end
+
+  def find_post
+    Post.find(params[:id])
   end
 end
