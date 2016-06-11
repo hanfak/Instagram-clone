@@ -10,7 +10,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
-      flash[:success] = "Your post has been created."
+      flash[:notice] = "Your post has been created."
       redirect_to @post
     else
       flash[:alert] = "Halt, you fiend! You need an image to post here!"
@@ -30,12 +30,19 @@ class PostsController < ApplicationController
   def update
     @post = find_post
     if @post.update(post_params)
-      flash[:success] = "Post updated hombre"
+      flash[:notice] = "Post updated hombre"
       redirect_to(post_path(@post))
     else
       flash[:alert] = "Something is wrong with your form!"
       render :edit
     end
+  end
+
+  def destroy
+    @post = find_post
+    @post.destroy
+    flash[:notice] = 'Problem solved!  Post deleted.'
+    redirect_to '/'
   end
 
   private
