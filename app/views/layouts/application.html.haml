@@ -6,6 +6,7 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    = link_to "Register", new_user_registration_path
     %a{:href => "/", :style => "text-decoration:none; color:black"}
       %h1 Photogram
 
