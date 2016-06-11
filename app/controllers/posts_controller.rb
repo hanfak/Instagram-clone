@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
+  before_action :find_post, only: [:show, :edit, :update, :destroy]
+
   def index
     @posts = Post.all
+  end
+
+  def show
   end
 
   def new
@@ -16,19 +21,12 @@ class PostsController < ApplicationController
       flash[:alert] = "Halt, you fiend! You need an image to post here!"
       render :new
     end
-
-  end
-
-  def show
-    @post = find_post
   end
 
   def edit
-    @post = find_post
   end
 
   def update
-    @post = find_post
     if @post.update(post_params)
       flash[:notice] = "Post updated hombre"
       redirect_to(post_path(@post))
@@ -39,19 +37,17 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = find_post
     @post.destroy
     flash[:notice] = 'Problem solved!  Post deleted.'
     redirect_to '/'
   end
 
   private
+    def post_params
+      params.require(:post).permit(:caption, :image)
+    end
 
-  def post_params
-    params.require(:post).permit(:caption, :image)
-  end
-
-  def find_post
-    Post.find(params[:id])
-  end
+    def find_post
+      @post = Post.find(params[:id])
+    end
 end
