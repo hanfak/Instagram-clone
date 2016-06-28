@@ -1,4 +1,4 @@
-require 'rails_helper'
+ require 'rails_helper'
 
 feature 'User authentication' do
   background do
@@ -18,6 +18,15 @@ feature 'User authentication' do
     expect(page).to_not have_content('Register')
     expect(page).to have_content('Logout')
     expect(page).to have_link('New Post')
+  end
+
+  scenario 'After log in shows welcome message' do
+    visit '/'
+    click_link 'Login'
+    fill_in 'Email', with: 'fancyfrank@gmail.com'
+    fill_in 'Password', with: 'illbeback'
+    click_button 'Log in'
+    expect(page).to have_content('Welcome, Arnie')
   end
 
   scenario 'can log out once logged in' do

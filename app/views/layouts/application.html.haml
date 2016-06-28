@@ -1,7 +1,7 @@
 !!!
 %html
   %head
-    %title Photogram
+    %title Pictogram
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -9,6 +9,8 @@
     - if user_signed_in?
       %li
         = link_to "New Post", new_post_path
+        Welcome,
+        = current_user.user_name
       %li
         = link_to "Logout", destroy_user_session_path, method: :delete
     - else
@@ -18,7 +20,7 @@
         = link_to "Register", new_user_registration_path
 
     %a{:href => "/", :style => "text-decoration:none; color:black"}
-      %h1 Photogram
+      %h1 Pictogram
 
     = notice
     = alert
