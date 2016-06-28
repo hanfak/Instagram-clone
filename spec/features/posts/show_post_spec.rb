@@ -1,8 +1,3 @@
-# create a post with factory_girl
-# visit '/'
-# click on an image link
-# expect to be taken to the show page of our post
-
 require 'rails_helper'
 
 feature 'displays one posts' do
